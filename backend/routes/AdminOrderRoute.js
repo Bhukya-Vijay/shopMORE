@@ -40,7 +40,7 @@ router.put("/:id", protect, admin, async (req, res) => {
     }
 })
 
-// @Route DELETE /api/admin/routes/:id
+// @Route DELETE /api/admin/orders/:id
 // @desc delete an order
 // @access Private/Admin
 router.delete("/:id", protect, admin, async (req, res) => {

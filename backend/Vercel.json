@@ -12,5 +12,10 @@
             "src": "/(.*)",
             "dest": "backend/server.js"
         }
-    ]
+    ],
+    "functions": {
+        "server.js": {
+            "runtime": "nodejs18.x"
+        }
+    }
 }
