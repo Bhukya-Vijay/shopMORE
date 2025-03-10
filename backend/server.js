@@ -20,7 +20,7 @@ app.use(cors())
 
 
 dotenv.config()
-const PORT = process.env.PORT || 8745
+
 
 // connect to MongoDB
 
@@ -44,8 +44,6 @@ app.use("/api/admin/users", adminRoute)
 app.use("/api/admin/products", productAdminRoutes)
 app.use("/api/admin/orders", adminOrders)
 
-app.listen(PORT, () => {
-    console.log(`server is running on http://localhost:${PORT}`)
-})
+export default app
 
 

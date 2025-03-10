@@ -2,6 +2,8 @@ import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 import { Link } from "react-router-dom"
+import Scrollbar from 'react-custom-scrollbars-2'
+
 
 
 function NewArrivals() {
@@ -101,21 +103,37 @@ function NewArrivals() {
                 </div>
             </div>
             {/* Scrollable Content */}
-            <div ref={scrollRef} className={`container mx-auto overflow-scroll scrollbar-hide flex space-x-6 relative 
-        ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
-                onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
-                {newArrivals.map((product) => (
-                    <div key={product._id} className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative">
-                        <img src={product.images[0]?.url} alt={product.image?.altText || product.name} className="w-full h-[300px] object-cover rounded-lg" draggable="false" />
-                        <div className="absolute bottom-0 left-0 right-0 bg-opacity-50 backdrop-blur-md text-white rouded-b-lg">
-                            <Link to={`/product/${product._id}`} className="block">
-                                <h4 className="font-medium">{product.name}</h4>
-                                <p className="mt-1 ">${product.price}</p>
-                            </Link>
+            <Scrollbar
+                ref={scrollRef}
+                autoHide
+                onScrollFrame={checkScrollPosition}
+                style={{ width: "100%", height: "auto" }}
+            >
+                <div
+                    className="flex space-x-6 relative"
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                >
+                    {newArrivals.map((product) => (
+                        <div key={product._id} className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative">
+                            <img
+                                src={product.images?.length > 0 ? product.images[0].url : "/placeholder.jpg"}
+                                alt={product.name || "Product"}
+                                className="w-full h-[300px] object-cover rounded-lg"
+                                draggable="false"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 bg-opacity-50 backdrop-blur-md text-white rounded-b-lg p-2">
+                                <Link to={`/product/${product._id}`} className="block">
+                                    <h4 className="font-medium">{product.name}</h4>
+                                    <p className="mt-1 ">${product.price}</p>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </Scrollbar>
         </section>
     )
 }
