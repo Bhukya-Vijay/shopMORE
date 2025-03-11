@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "postinstall": "chmod +x node_modules/.bin/vite || echo 'Skipping chmod on Windows'",
     "build": "npm run build-vite",
     "lint": "eslint .",
     "preview": "vite preview"
